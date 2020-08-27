@@ -1,4 +1,4 @@
-package com.example.kotlin_countries.service
+package com.example.kotlin_countries.db
 
 import android.content.Context
 import androidx.room.Database
@@ -9,7 +9,7 @@ import com.example.kotlin_countries.model.Country
 @Database(entities = arrayOf(Country::class), version = 1)
 abstract class CountryDatabase : RoomDatabase() {
 
-    abstract  fun countryDao():CountryDAO
+    abstract  fun countryDao(): CountryDAO
 
     //Singleton
 
@@ -19,8 +19,12 @@ abstract class CountryDatabase : RoomDatabase() {
         private val lock = Any()
 
 
-        operator fun invoke (context: Context) = instance?: synchronized(lock) {
-            instance ?: makeDatabase(context).also {
+        operator fun invoke (context: Context) = instance
+            ?: synchronized(lock) {
+            instance
+                ?: makeDatabase(
+                    context
+                ).also {
 
                 instance = it
             }
@@ -28,7 +32,8 @@ abstract class CountryDatabase : RoomDatabase() {
 
         private fun makeDatabase (context: Context) = Room.databaseBuilder(
 
-            context.applicationContext,CountryDatabase::class.java , "countryDatabase"
+            context.applicationContext,
+            CountryDatabase::class.java , "countryDatabase"
 
         ).build ()
 

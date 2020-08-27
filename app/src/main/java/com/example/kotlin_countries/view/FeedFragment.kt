@@ -7,17 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin_countries.R
 import com.example.kotlin_countries.adapter.CountryAdapter
 import com.example.kotlin_countries.viewmodel.FeedViewModel
 import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.item_country.view.*
 
 
 class FeedFragment : Fragment() {
 
     private  lateinit var viewModel : FeedViewModel
-    private val countryAdapter = CountryAdapter(arrayListOf())
+    private val countryAdapter = CountryAdapter(arrayListOf()) {
+        val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(it)
+        findNavController().navigate(action)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -26,6 +26,8 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
+                tools:listitem="@layout/item_country"
+                tools:itemCount="3"
                 android:layout_marginBottom="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Error Try Again"
-
+                tools:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

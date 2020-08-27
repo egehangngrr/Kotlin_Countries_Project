@@ -1,4 +1,4 @@
-package com.example.kotlin_countries.service
+package com.example.kotlin_countries.db
 
 import androidx.room.Dao
 import androidx.room.Insert

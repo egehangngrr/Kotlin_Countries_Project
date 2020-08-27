@@ -3,10 +3,9 @@ package com.example.kotlin_countries.viewmodel
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.kotlin_countries.model.Country
 import com.example.kotlin_countries.service.CountryAPIService
-import com.example.kotlin_countries.service.CountryDatabase
+import com.example.kotlin_countries.db.CountryDatabase
 import com.example.kotlin_countries.util.CustomSharedPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -47,7 +46,9 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
         countryLoading.value = true
 
         launch {
-            val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()
+            val countries = CountryDatabase(
+                getApplication()
+            ).countryDao().getAllCountries()
             showCountries(countries)
             Toast.makeText(getApplication(),"Countries From SQLite",Toast.LENGTH_LONG).show()
         }
@@ -95,7 +96,9 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
 
         launch {
 
-            val dao = CountryDatabase(getApplication()).countryDao()
+            val dao = CountryDatabase(
+                getApplication()
+            ).countryDao()
             dao.deleteAllCountries()
             val listLong = dao.insertAll(*list.toTypedArray()) // -> list -> individual
 
